@@ -1,0 +1,94 @@
+@mixin width-container {
+  text-align: left;
+  width: 320px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+@mixin container() {
+  width: 320px;
+  @media #{$tablet-width} {
+    width: 768px;
+  }
+  @media #{$desktop-width} {
+    width: 1200px;
+  }
+}
+
+@mixin clearfix {
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin size($width, $height: $width) {
+  width: $width;
+  height: $height;
+}
+
+@mixin absolute-pseudo-element($top: auto, $left: auto, $bottom: auto, $right: auto) {
+  content: "";
+  position: absolute;
+  top: $top;
+  left: $left;
+  bottom: $bottom;
+  right: $right;
+}
+
+@mixin visuallyhidden {
+  margin: -1px;
+  padding: 0;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip: rect(0, 0, 0, 0);
+  position: absolute;
+}
+
+@mixin about-us-icon($url) {
+  content: "";
+  position: absolute;
+  width: 55px;
+  height: 40px;
+  top: -6px;
+  left: -6px;
+  background: url($url) no-repeat;
+  background-position: 50% 50%;
+}
+
+@mixin form-element($top, $left) {
+  content: "";
+  display: block;
+  position: absolute;
+  top: $top;
+  left: $left;
+  height: 36px;
+  width: 36px;
+  border: 2px solid $dark-gray;
+}
+
+
+// Triangle helper mixin (by Yair Even-Or)
+// @param {Direction} $direction - either `top`, `right`, `bottom` or `left`
+// @param {Color} $color [currentcolor] - Triangle color
+// @param {Length} $size [1em] - Triangle size
+// EXAMPLE:
+// span {
+//   @include triangle(bottom, red, 10px);
+// }
+@mixin triangle($direction, $color: currentcolor, $size: 1em) {
+  $size: $size/2;
+  $transparent: rgba($color, 0);
+  $opposite: (top:bottom, right:left, left:right, bottom:top);
+
+  content: '';
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border: $size solid $transparent;
+  border-#{map-get($opposite, $direction)}-color: $color;
+  margin-#{$direction}: -$size;
+}

@@ -1,0 +1,90 @@
+.logo img{
+  max-width: 120px;
+}
+
+.headerContainer {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -ms-flex-line-pack: stretch;
+  align-content: stretch;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.headerContainer .logo_wrapper {
+  -ms-flex: 12 0 120px;
+  flex: 12 0 120px;
+}
+
+.headerContainer .phones {
+  font-size: 14px;
+  text-align: right;
+  margin-right: 10px;
+  -ms-flex: 2 1 140px;
+  flex: 2 1 140px;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+.headerContainer .phones div{
+  flex: 1 0 100px;
+}
+
+.headerContainer .schedule {
+  -ms-flex: 1 1 90px;
+  flex: 1 1 90px;
+  font-size: 13px;
+}
+
+.phones .life {
+  display: inline-block;
+  width: 20px;
+  height: 16px;
+  background: url(../img/mbo-ico.png) no-repeat 0 0;
+  position: relative;
+}
+
+
+.headerContainer .phones .kstar {
+  display: inline-block;
+  width: 20px;
+  height: 16px;
+  background: url(../img/mbo-ico.png) no-repeat 0 0;
+  position: relative;
+  background-position: 0 -16px;
+}
+
+.headerContainer .phones .mts {
+  display: inline-block;
+  width: 20px;
+  height: 16px;
+  background: url(../img/mbo-ico.png) no-repeat 0 0;
+  position: relative;
+  background-position: 0 -38px;
+}
+
+
+@media #{$tablet-width} {
+  .headerContainer .phones {
+    font-size: 14px;
+    text-align: right;
+    margin-right: 10px;
+    -ms-flex: 2 1 200px;
+    flex: 2 1 200px;
+  }
+}
+
+
+@media #{$desktop-width} {
+  .headerContainer .phones {
+    font-size: 14px;
+    text-align: right;
+    margin-right: 10px;
+    -ms-flex: 2 1 140px;
+    flex: 2 1 140px;
+  }
+}

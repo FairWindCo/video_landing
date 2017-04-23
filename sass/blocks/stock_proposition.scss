@@ -1,0 +1,197 @@
+$stock_proposition_color:transparentize($dark-blur-panel,0.4);
+$slide-color:transparentize($dark-blur-panel,0.1);
+$slide-header-color:$footer-color;
+
+.stock-proposition__container{
+  min-height: 200px;
+  background: none;
+  padding-bottom: 50px;
+}
+
+.stock-proposition{
+  position: relative;
+  width:100%;
+  min-height: 200px;
+  background: $stock_proposition_color;
+  padding-bottom: 0px;
+  padding-top: 0px;
+  border-top: 1px solid $stock_proposition_color;
+  &::after{
+    display: block;
+    position: absolute;
+    bottom:-40px;
+    content: '';
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 40px 150px 0 150px;
+    border-color: $stock_proposition_color transparent transparent transparent;
+    line-height: 0px;
+    _border-color: $stock_proposition_color #000000 #000000 #000000;
+    _filter: progid:DXImageTransform.Microsoft.Chroma(color='#000000');
+  }
+}
+
+.stock-proposition__item{
+  width:280px;
+  margin: 25px 10px 10px 10px;
+  background-color: $slide-color;
+  color: white;
+  min-height: 300px;
+  padding-top: 5px;
+  position: relative;
+  &::before{
+    display: block;
+    position: absolute;
+    top:-20px;
+    content: '';
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0px 139px 20px 139px;
+    border-color: transparent transparent $slide-color transparent;
+    line-height: 0px;
+    _border-color: $stock_proposition_color #000000 #000000 #000000;
+    _filter: progid:DXImageTransform.Microsoft.Chroma(color='#000000');
+  }
+  &::after{
+    display: block;
+    position: absolute;
+    bottom:-20px;
+    content: '';
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 20px 139px 0 139px;
+    border-color: $slide-color transparent transparent transparent;
+    line-height: 0px;
+    _border-color: $stock_proposition_color #000000 #000000 #000000;
+    _filter: progid:DXImageTransform.Microsoft.Chroma(color='#000000');
+  }
+}
+.stock-proposition__item a{
+  width: 50px;
+  display: block;
+  margin: 0 auto;
+}
+.stock-proposition__item__flags{
+  @include clearfix();
+}
+
+
+.stock-proposition__item__flags img{
+  display: inline-block;
+  height: 50px;
+  float:left;
+}
+
+.stock-proposition__item img{
+  max-width:250px;
+  margin: 0 auto;
+  display: block;
+}
+
+.stock-proposition__item__flags img{
+  max-width: 70px;
+}
+
+
+.stock-proposition__item h2{
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  padding: 3px 2px;
+  background-color: $slide-header-color;
+  margin-top:2px;
+}
+.stock-proposition__item p{
+  padding: 0 5px;
+  color: white;
+}
+.stock-proposition__item li{
+  padding: 0 7px;
+  color: white;
+  font-size: 14px;
+  font-style: italic;
+}
+
+@media #{$tablet-width} {
+  .stock-proposition{
+    width:100%;
+    min-height: 200px;
+    padding-bottom: 0px;
+    &::after{
+      border-width: 40px 384px 0 384px;
+    }
+  }
+  .stock-proposition__item h2{
+
+  }
+  .stock-proposition__item img{
+    margin: 35px 5px 0px 10px;
+    width: 300px;
+    float: left;
+  }
+  .stock-proposition__item{
+    margin: 40px 5px 40px 5px;
+    width: 750px;
+    &::before{
+      border-width: 0px 374px 20px 374px;
+    }
+    &::after{
+      border-width: 20px 374px 0 374px;
+    }
+  }
+}
+
+@media #{$desktop-width} {
+  .stock-proposition__container{
+  }
+
+  .stock-proposition {
+    text-align: center;
+    padding-bottom: 40px;
+    &::after{
+      border-width: 40px 600px 0 600px;
+    }
+  }
+
+    .stock-proposition__item{
+      display: inline-block;
+      text-align: left;
+      margin: 25px 5px 10px 5px;
+      padding: 5px 0px 10px 0px;
+      width: 280px;
+      min-height: 400px;
+      &::before{
+        border-width: 0 139px 20px 139px;
+      }
+      &::after{
+        border-width: 20px 139px 0 139px;
+      }
+    }
+
+    .stock-proposition__item a{
+      display: block;
+      margin: 0 auto;
+    }
+
+    .stock-proposition__item img {
+      float: none;
+      max-width: 250px;
+    }
+
+  .stock-proposition__item__flags img{
+    display: inline-block;
+    margin: 0 auto;
+    max-width: 70px;
+    max-height: 50px;
+    float:left;
+  }
+
+
+
+}
+
+

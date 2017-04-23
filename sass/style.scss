@@ -1,0 +1,36 @@
+﻿
+
+
+@import "colors.scss";
+@import "variables.scss";
+
+@import "global/normalize.scss";
+@import "global/fonts.scss";
+@import "global/mixins.scss";
+@import "global/layout.scss";
+@import "global/gradiens.scss";
+
+
+
+@import "blocks/button.scss";
+@import "blocks/footer.scss";
+@import "blocks/header.scss";
+@import "blocks/scrollup.scss";
+@import "blocks/modal.scss";
+@import "blocks/propose.scss";
+@import "blocks/menu.scss";
+@import "blocks/gialogWindow.scss";
+@import "blocks/contact_form.scss";
+@import "blocks/stock_proposition";
+@import "blocks/futures.scss";
+@import "blocks/futures.scss";
+@import "blocks/price.scss";
+
+main{
+  background-image: url('../img/logo_fon.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 500px;
+}
+
+

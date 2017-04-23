@@ -1,0 +1,79 @@
+$propose-color:$blue;
+.proposition{
+  @include clearfix();
+}
+
+.proposition img{
+  display: none;
+  max-width: 540px;
+  float: none;
+}
+
+.propose {
+  float: left;
+  position: relative;
+  min-height: 50px;
+  padding: 3px;
+  background-color: $propose-color;
+  border-radius: 3px;
+
+  &--title{
+    margin: 10px 0;
+    font-size: 18px;
+    text-align: center;
+  }
+
+  &--text{
+    font-size: 14px;
+    padding: 0 10px;
+  }
+
+  &--text p{
+    margin: 10px 0px;
+  }
+}
+
+.propose::before{
+  content: "";
+  position: absolute;
+  top:10px;
+  left: -20px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 20px 20px 0;
+  border-color: transparent $propose-color transparent transparent;
+  line-height: 0px;
+  _border-color: #000000 $propose-color #000000 #000000;
+  _filter: progid:DXImageTransform.Microsoft.Chroma(color='#000000');
+}
+
+
+@media #{$tablet-width} {
+  .propose {
+    width: 100%;
+  }
+
+  .proposition img{
+    display: block;
+    max-width: 768px;
+    margin: 0 auto;
+    float: none;
+  }
+
+}
+
+@media #{$desktop-width} {
+  $propose-width:650px;
+  .propose {
+    width: $propose-width;
+    height: 176px;
+  }
+
+  .proposition img{
+    display: block;
+    max-width: 540px;
+    margin: 0 auto;
+    float: right;
+  }
+}

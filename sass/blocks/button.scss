@@ -1,0 +1,96 @@
+﻿$button-color:#2b74a6;
+$button-text-color:#fff;
+$button-border-1:#3fb8f5;
+$button-border-2:#000;
+$button-border-3:#184d69;
+$button-gradint_from:#31a3dd;
+$button-gradint_to:#254974;
+$button-gradint_color:$button-color;
+$hover-blue: lighten($button-color,40%);
+
+$button-yellow-color:#E38916;
+$button-yellow-text-color:#fff;
+$button-yellow-color:#E38916;
+$button-yellow-border-1:#FDBE33;
+$button-yellow-border-2:#000;
+$button-yellow-border-3:#D77206;
+$button-yellow-gradint_from:#F3AE0F;
+$button-yellow-gradint_to:$button-yellow-color;
+$button-yellow-gradint_color:$button-yellow-color;
+$hover-yellow: darken($button-yellow-color,20%);
+
+.button {
+	font-weight: bold;
+	  min-width: $button-min-width;
+    margin-top: 10px;
+    display: inline-block;
+    color: $button-text-color;
+    text-decoration: none;
+    padding: 10px 5px;
+    outline: none;
+	  text-align: center;
+    border-width: 2px 0;
+    border-style: solid none;
+    border-color: $button-border-1 $button-border-2 $button-border-3;
+    border-radius: 6px;
+    background: linear-gradient($button-gradint_from, $button-gradint_to) $button-gradint_color;
+    transition: 0.2s;
+
+
+	&:hover {
+		color: $button-text-color;
+		text-decoration: none;
+		background: linear-gradient($button-gradint_from, $hover-blue) $hover-blue;
+	}
+
+	&:active {
+		color: $button-text-color;
+		text-decoration: none;
+		background: linear-gradient($button-gradint_from, $hover-blue) $hover-blue;
+	}
+}
+
+.button--yelow {
+	color: $button-yellow-text-color;
+	text-transform: uppercase;
+	border-color: $button-yellow-border-1 $button-yellow-border-2 $button-yellow-border-3;
+	background: linear-gradient($button-yellow-gradint_from, $button-yellow-gradint_to) $button-yellow-gradint_color;
+
+  	&:hover {
+		color: $button-yellow-text-color;
+		text-decoration: none;
+		background: linear-gradient($button-yellow-gradint_from, $hover-yellow) $hover-yellow;
+	}
+
+	&:active {
+		color: $button-yellow-text-color;
+		text-decoration: none;
+		background: linear-gradient($button-yellow-gradint_from, $hover-yellow) $hover-yellow;
+	}
+}
+
+.button--small{
+  padding: 2px 3px;
+  min-width: 50px;
+  cursor: hand;
+  margin-top: 0;
+}
+
+
+.button--big {
+  width: 100%;
+  min-height: 52px;
+  font-size: 17px;
+  text-transform: uppercase;
+  color: $dark-gray;
+  margin: 30px 0;
+  transition: 100ms ease-in-out;
+
+  &:hover {
+    background-color: $dark-gray;
+    color: white;
+  }
+  &:active {
+    color: #7c7c7c;
+  }
+}

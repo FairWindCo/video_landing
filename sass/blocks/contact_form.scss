@@ -1,0 +1,54 @@
+.contactForm {
+  border: 1px solid #2fc5eb;
+  padding: 2px 5px;
+  width: 90%;
+  text-align: center;
+  margin: 0 auto; /* 15% from the top and centered */
+}
+
+.contactForm input, .contactForm textarea {
+  margin: 5px auto;
+  font-family: inherit;
+  text-transform: inherit;
+  font-size: inherit;
+  display: block;
+  width: 90%;
+  padding: 1px;
+}
+.contactForm textarea { height: 80px; resize: none; }
+
+.contactForm .formBtn {
+  width: 45%;
+  display: inline-block;
+  background: $button-color;
+  color: #fff;
+  font-weight: 100;
+  font-size: 15px;
+  border: none;
+  height: 35px;
+  border-width: 2px 0;
+  border-style: solid none;
+  border-color: $button-border-1 $button-border-2 $button-border-3;
+  border-radius: 6px;
+  background: linear-gradient($button-gradint_from, $button-gradint_to) $button-gradint_color;
+  transition: 0.2s;
+
+  &:hover {
+    color: $button-text-color;
+    text-decoration: none;
+    background: linear-gradient($button-gradint_from, $hover-blue) $hover-blue;
+  }
+
+  &:active {
+    color: $button-text-color;
+    text-decoration: none;
+    background: linear-gradient($button-gradint_from, $hover-blue) $hover-blue;
+  }
+}
+
+@media #{$mobile-width} {
+  .contactForm input,
+  .contactForm  textarea{
+    font-size: 14px;
+  }
+}

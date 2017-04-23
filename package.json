@@ -1,0 +1,39 @@
+{
+  "name": "small_comp_landing",
+  "version": "1.0.0",
+  "description": "Landing page for NKT small computers ",
+  "private": true,
+  "author": "Sergey Manenok",
+  "license": "ISC",  
+  "devDependencies": {
+    "autoprefixer": "6.5.4",
+    "browser-sync": "2.18.2",
+    "gulp": "3.9.1",
+    "gulp-plumber": "1.1.0",
+    "gulp-postcss": "6.2.0",
+    "gulp-sass": "2.3.2",
+    "@htmlacademy/editorconfig-cli": "0.1.x"
+  },
+  "scripts": {
+    "test": "editorconfig-cli",
+    "build": "gulp style",
+    "start": "gulp serve"
+  },
+  "editorconfig-cli": [
+    "*.html",
+    "*.json",
+    "*.js",
+    "js/**/*.js",
+    "img/**/*.svg",
+    "sass/**/*.{sass,scss}"
+  ],
+  "engines": {
+    "node": "7.7"
+  },
+
+
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FairWindCo/video_landing"
+  }
+}

@@ -1,0 +1,13 @@
+$gradint-start-color: #c2d2dd;
+$gradint-end-color:#fff;
+
+.gradient-nkt-blue {
+  background-color: $gradint-start-color;
+  background-image: -moz-linear-gradient(top,$gradint-start-color,$gradint-end-color);
+  background-image: -webkit-gradient(linear,0 0,0 100%,from($gradint-start-color),to($gradint-end-color));
+  background-image: -webkit-linear-gradient(top,$gradint-start-color,$gradint-end-color);
+  background-image: -o-linear-gradient(top,$gradint-start-color,$gradint-end-color);
+  background-image: linear-gradient(to bottom,$gradint-start-color,$gradint-end-color);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$gradint-start-color', endColorstr='$gradint-end-color', GradientType=0);
+}
