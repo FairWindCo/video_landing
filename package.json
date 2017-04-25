@@ -1,10 +1,10 @@
 {
-  "name": "small_comp_landing",
+  "name": "video_landing",
   "version": "1.0.0",
-  "description": "Landing page for NKT small computers ",
+  "description": "Landing page for INNOSYSTEMS video security complects",
   "private": true,
   "author": "Sergey Manenok",
-  "license": "ISC",  
+  "license": "ISC",
   "devDependencies": {
     "autoprefixer": "6.5.4",
     "browser-sync": "2.18.2",

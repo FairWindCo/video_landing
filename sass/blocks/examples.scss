@@ -1,0 +1,67 @@
+.examples iframe{
+  width:270px;
+  height:170px;
+}
+.examples{
+   text-align: center;
+  margin-top: 5px;
+  background-color: #314761;
+  padding-bottom: 5px;
+}
+
+.video-example--header{
+  width: 100%;
+  color: white;
+  background-color: #35587e;
+  padding: 4px 0px;
+}
+.video-example{
+  display: inline-block;
+  width: 270px;
+  margin: 5px 10px;
+  border: 1px solid white;
+  padding: 0px;
+}
+@media #{$tablet-width} {
+  .examples iframe{
+    width:570px;
+    height:340px;
+  }
+  .examples{
+    text-align: center;
+  }
+
+  .video-example--header{
+    width: 100%;
+    color: white;
+    background-color: #2b74a6;
+    padding: 4px 0px;
+  }
+  .video-example{
+    display: inline-block;
+    width: 570px;
+    margin: 5px 10px;
+  }
+}
+
+@media #{$desktop-width} {
+  .examples iframe{
+    width:550px;
+    height:320px;
+  }
+  .examples{
+    text-align: center;
+  }
+
+  .video-example--header{
+    width: 100%;
+    color: white;
+    background-color: #2b74a6;
+    padding: 4px 0px;
+  }
+  .video-example{
+    display: inline-block;
+    width: 550px;
+    margin: 5px 10px;
+  }
+}
