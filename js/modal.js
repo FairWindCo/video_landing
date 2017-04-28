@@ -19,6 +19,11 @@ function createAjax(formName,nameOfModalForm,nameOfModalElement){
         modalForm.css("display", "none");
         modal.css("display", "block");
         text = typeof data['text'] !== 'undefined'? data['text'] : data['error'];
+        if(data['error'] !== 'undefined'){
+          modal.find('.propouseWindow--header').addClass('propouseWindow--header__red')
+        } else {
+          modal.find('.propouseWindow--header').removeClass('propouseWindow--header__red')
+        }
         modal.find('.responseHeaderText').text(data['message']);
         modal.find('.responseText').text(text);
         //alert('Thanks for your comment!' + data);

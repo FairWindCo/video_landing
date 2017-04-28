@@ -1,0 +1,156 @@
+$phone_width:56px;
+$phone_height:$phone_width;
+$animation_delay:60s;
+
+@keyframes help_phone-fadein {
+  from { opacity: 0; display: block;}
+  to   { opacity: 1; display: block;}
+}
+
+@keyframes showEffect {
+  0% { display: none; visibility: hidden; opacity: 0; }
+  90% { display: none; visibility: hidden; opacity: 0; }
+  100% { display: block; visibility: visible;  opacity: 1; }
+}
+
+.help_phone {
+  position: fixed !important;
+  z-index: 9000000 !important;
+  width: $phone_width !important;
+  height: $phone_height !important;
+  right: 2%;
+  bottom: 5%;
+  animation: showEffect $animation_delay;
+}
+
+.help_phone_future, .help_phone_future:after, .help_phone_future:before {
+  vertical-align: baseline !important;
+  font-weight: 300 !important;
+  font-family: inherit !important;
+  font-style: inherit !important;
+  font-size: 100%;
+  border: 0 none !important;
+  outline: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  font-family: 'Roboto',sans-serif !important;
+  line-height: normal !important;
+  box-sizing: content-box !important;
+  text-align: left !important;
+  transform-origin: center;
+  background-position: 0 0;
+  background-repeat: repeat;
+  content: none;
+}
+
+.help_phone_future--button_call_background {
+  border-radius: 100px !important;
+  width: $phone_width !important;
+  height: $phone_height !important;
+  opacity: .92 !important;
+  position: absolute !important;
+  cursor: pointer !important;
+}
+
+.help_phone_future--button_call {
+  position: fixed !important;
+  z-index: 9000000 !important;
+  width: $phone_width !important;
+  height: $phone_height !important;
+  user-select: none;
+  border-radius: 100px !important;
+}
+
+@keyframes help_phone_future_button_underlay{
+  0%{opacity:0;width:0;height:0;margin-top:0;margin-left:0}
+  20%{opacity:.35;width:$phone_width*2;height:$phone_height*2;margin-top:-$phone_height;margin-left:-$phone_width}
+  75%{opacity:.35;width:$phone_width*2;height:$phone_height*2;margin-top:-$phone_height;margin-left:-$phone_width}
+  100%{opacity:0;width:$phone_width*3;height:$phone_height*3;margin-top:-$phone_height*3/2;margin-left:-$phone_width*3/2}
+}
+
+
+.help_phone_future--button_call_ubderlay {
+  border-radius: 100px !important;
+  position: absolute !important;
+  left: 50% !important;
+  top: 50% !important;
+  width: 0 !important;
+  height: 0 !important;
+  margin: -69px 0 0 -69px !important;
+  background: #88d6ff !important;
+  opacity: 0;
+  animation: help_phone_future_button_underlay 8s infinite !important;
+  animation-delay:$animation_delay;
+}
+
+@keyframes help_phone_future_button_phone{
+  47%{transform:rotate(0deg)}
+  50%{transform:rotate(15deg)}
+  53%{transform:rotate(0deg)}
+  54%{transform:rotate(15deg)}
+  57%{transform:rotate(0deg)}
+  60%{transform:rotate(15deg)}
+  63%{transform:rotate(0deg)}
+  66%{transform:rotate(15deg)}
+  69%{transform:rotate(0deg)}
+  72%{transform:rotate(15deg)}
+  75%{transform:rotate(0deg)}
+}
+
+.help_phone_future--button_call_phone {
+  width: $phone_width !important;
+  height: $phone_height !important;
+  background-image: url('../img/phone.png');
+  background-position: center center !important;
+  background-size: 60%;
+  background-repeat: no-repeat !important;
+  position: absolute !important;
+  animation: help_phone_future_button_phone 5s infinite !important;
+  cursor: pointer !important;
+  animation-delay:$animation_delay;
+}
+
+.deep_blue_background {
+  background: #0e8bff;
+  background: radial-gradient(ellipse at center,#0e8bff 0,#568eff 100%);
+}
+
+.ubderlay_deep_water_background {
+  background: #b3d3ff !important;
+}
+
+
+.phone_future--form{
+  height: 232px !important;
+  width: 100% !important;
+  position: fixed !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  z-index: 10000000005 !important;
+  background-color: #92bcff;
+}
+
+.phone_future--form--header {
+  height: 17px !important;
+  text-align: center !important;
+}
+
+.phone_future--form--header--close {
+  position: absolute !important;
+  right: 14px !important;
+  top: 10px !important;
+  width: 14px !important;
+  height: 14px !important;
+  background-image: url('../img/close.png');
+  cursor: pointer !important;
+  border: 1px solid white;
+  border-radius: 50%;
+}
+
+.phone_future--form--left-icons {
+  height: 166px !important;
+  width: 51px !important;
+  margin-left: 16px !important;
+  padding-top: 1px !important;
+  float: left !important;
+}
