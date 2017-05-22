@@ -118,3 +118,44 @@ function createModalWindow(nameOfModalElement) {
     })
   });
 }
+
+
+function createFeedBackActivator(nameOfModalElement,nameActivator,activateStyle,removeStyle,feedBackActivatorWrapper) {
+  nameOfModalElement = typeof nameOfModalElement !== 'undefined' ? nameOfModalElement : '#feedBackForm';
+  nameActivator = typeof nameActivator !== 'undefined' ? nameActivator : '#feedBackActivator';
+  nameDeActivator = typeof nameDeActivator !== 'undefined' ? nameDeActivator : "#feedBackFormClose";
+  activateMoveStyle = typeof activateStyle !== 'undefined' ? activateStyle : "showBlockMoveAnimation";
+  removeMoveStyle = typeof removeStyle !== 'undefined' ? removeStyle : "hideBlockMoveAnimation";
+  activateStyle = typeof activateStyle !== 'undefined' ? activateStyle : "showBlockAnimation";
+  removeStyle = typeof removeStyle !== 'undefined' ? removeStyle : "hideBlockAnimation";
+  feedBackActivatorWrapper=typeof feedBackActivatorWrapper !== 'undefined' ? feedBackActivatorWrapper : "#feedBackActivatorWrapper";
+  jQuery(document).ready(function () {
+    // Get the modal
+    var modal = jQuery(nameOfModalElement);
+    var activator=jQuery(nameActivator);
+    var deactivator=jQuery(nameDeActivator);
+    var feedactivator=jQuery(feedBackActivatorWrapper);
+    activator.click(
+      function (event) {
+        event.preventDefault();
+        // When the user clicks on the button, open the modal
+        modal.css("display", "block");
+        modal.removeClass(removeMoveStyle);
+        modal.addClass(activateMoveStyle);
+
+        feedactivator.addClass(removeStyle);
+        feedactivator.removeClass(activateStyle);
+      });
+
+    deactivator.click(
+      function (event) {
+        event.preventDefault();
+        // When the user clicks on the button, open the modal
+        //modal.css("display", "none");
+        feedactivator.removeClass(removeStyle);
+        feedactivator.addClass(activateStyle);
+        modal.removeClass(activateMoveStyle);
+        modal.addClass(removeMoveStyle);
+      });
+  });
+}

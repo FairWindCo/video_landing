@@ -1,6 +1,8 @@
 $phone_width:56px;
 $phone_height:$phone_width;
-$animation_delay:60s;
+$animation_delay:6s;
+
+$panel-color:#013e61;
 
 @keyframes help_phone-fadein {
   from { opacity: 0; display: block;}
@@ -9,8 +11,24 @@ $animation_delay:60s;
 
 @keyframes showEffect {
   0% { display: none; visibility: hidden; opacity: 0; }
-  90% { display: none; visibility: hidden; opacity: 0; }
-  100% { display: block; visibility: visible;  opacity: 1; }
+  50% { display: none; visibility: hidden; opacity: 0.5; }
+  100% { display: block !important; visibility: visible;  opacity: 1; }
+}
+
+@keyframes hideEffect {
+  0% { display: block; visibility: visible;  opacity: 1; }
+  50% { display: block; visibility: visible;  opacity: 0.5; }
+  100% { display: none !important; visibility: hidden; opacity: 0; }
+}
+
+@keyframes moveEffect {
+  0% { transform: translate(-50%, -5000%);}
+  100% { transform: translate(-50%, -50%);}
+}
+
+@keyframes moveEffectOut {
+  0% { transform: translate(-50%, -50%);}
+  100% { transform: translate(-50%, -5000%);}
 }
 
 .help_phone {
@@ -22,6 +40,27 @@ $animation_delay:60s;
   bottom: 5%;
   animation: showEffect $animation_delay;
 }
+
+.hideBlockAnimation{
+  animation: hideEffect 2s;
+  animation-fill-mode: forwards;
+}
+
+.showBlockAnimation{
+  animation: showEffect 1s;
+  animation-fill-mode: backwards;
+}
+
+.hideBlockMoveAnimation{
+  animation: hideEffect 2s, moveEffectOut 2s;
+  animation-fill-mode: forwards;
+}
+
+.showBlockMoveAnimation{
+  animation: showEffect 1s, moveEffect 1s;
+  animation-fill-mode: backwards;
+}
+
 
 .help_phone_future, .help_phone_future:after, .help_phone_future:before {
   vertical-align: baseline !important;
@@ -121,24 +160,56 @@ $animation_delay:60s;
 
 
 .phone_future--form{
+  display: none;
+  position: absolute;
+  left:50%;
+  top:50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
   height: 232px !important;
-  width: 100% !important;
+  width: 300px !important;
   position: fixed !important;
-  bottom: 0 !important;
-  left: 0 !important;
   z-index: 10000000005 !important;
-  background-color: #92bcff;
+  @include clearfix();
+  filter: drop-shadow(10px 10px 5px #263d45);
 }
 
 .phone_future--form--header {
-  height: 17px !important;
+  position: relative;
+  color: white;
+  height: 30px !important;
   text-align: center !important;
+  margin-left: 70px;
+  margin-right: 30px;
+  background-color: $panel-color;
+  filter: drop-shadow(-1px -1px 1px white);
+}
+.phone_future--form--header::after,
+.phone_future--form--header::before{
+  top:0px;
+  content: "";
+  display: block;
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+.phone_future--form--header::before{
+  left: -30px;
+  border-width: 0 0 30px 30px;
+  border-color: transparent transparent $panel-color transparent;
+}
+
+.phone_future--form--header::after{
+  right: -30px;
+  border-width: 30px 30px 0 0;
+  border-color: $panel-color transparent transparent transparent;
 }
 
 .phone_future--form--header--close {
   position: absolute !important;
-  right: 14px !important;
-  top: 10px !important;
+  right: 0px !important;
+  top: 6px !important;
   width: 14px !important;
   height: 14px !important;
   background-image: url('../img/close.png');
@@ -153,4 +224,61 @@ $animation_delay:60s;
   margin-left: 16px !important;
   padding-top: 1px !important;
   float: left !important;
+}
+
+.phone_future--form--tabs{
+  width:40px;
+  height: 100%;
+  float: left;
+  filter: drop-shadow(-1px -1px 1px white);
+}
+
+.phone_future--form--tab{
+  display: inline-block;
+  text-align: center;
+  position: relative;
+  width:100%;
+  height: 20px;
+  margin-top: 40px;
+  background-color: #013e61;
+}
+.phone_future--form--tabs:first-child{
+  margin-top: 30px;
+}
+.phone_future--form--tab::before{
+  content: "";
+  display: block;
+  position: absolute;
+  top: -40px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 0 40px 40px;
+  border-color: transparent transparent $panel-color transparent;
+}
+
+.phone_future--form--tab::after{
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: -40px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 40px 40px 0 0 ;
+  border-color: $panel-color transparent transparent transparent;
+}
+
+$line-color: #003655;
+
+.phone_future--content{
+  background-color: $panel-color;
+  height: 100%;
+  margin-left: 40px;
+  margin-right: 30px;
+  border-bottom: 3px solid $line-color;
+  border-right: 3px solid $line-color;
+  border-top: 3px solid $line-color;
+  border-left: 3px solid $line-color;
+  border-bottom-right-radius:30px;
 }
