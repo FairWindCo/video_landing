@@ -1,6 +1,6 @@
 $phone_width:56px;
 $phone_height:$phone_width;
-$animation_delay:6s;
+$animation_delay:60s;
 
 $panel-color:#013e61;
 
@@ -166,7 +166,7 @@ $panel-color:#013e61;
   top:50%;
   margin-right: -50%;
   transform: translate(-50%, -50%);
-  height: 232px !important;
+  height: 350px !important;
   width: 300px !important;
   position: fixed !important;
   z-index: 10000000005 !important;
@@ -241,6 +241,7 @@ $panel-color:#013e61;
   height: 20px;
   margin-top: 40px;
   background-color: #013e61;
+  cursor: pointer;
 }
 .phone_future--form--tabs:first-child{
   margin-top: 30px;
@@ -255,6 +256,14 @@ $panel-color:#013e61;
   border-style: solid;
   border-width: 0 0 40px 40px;
   border-color: transparent transparent $panel-color transparent;
+}
+.phone_future--form--tab img{
+  display: block;
+  position: absolute;
+  left: 5px;
+  top:-5px;
+  max-width: 30px;
+  z-index: 5;
 }
 
 .phone_future--form--tab::after{
@@ -281,4 +290,75 @@ $line-color: #003655;
   border-top: 3px solid $line-color;
   border-left: 3px solid $line-color;
   border-bottom-right-radius:30px;
+  overflow-y: hidden;
+  padding: 2px;
+}
+.content-tab{
+  overflow-y: hidden;
+}
+.content-tab p{
+  margin: 0px;
+  margin-bottom: 5px;
+  color: white;
+  font-size: 15px;
+}
+.content-tab .formBtn {
+  width: 45%;
+  display: inline-block;
+  background: #2b74a6;
+  color: #fff;
+  font-weight: 100;
+  font-size: 15px;
+  border: none;
+  height: 30px;
+  border-width: 2px 0;
+  border-style: solid none;
+  border-color: #3fb8f5 #000 #184d69;
+  border-radius: 6px;
+  background: linear-gradient(#31a3dd, #254974) #2b74a6;
+  transition: 0.2s;
+  margin-top: 5px;
+}
+
+.content-tab input{
+  width: 90%;
+  margin-top: 5px;
+  border-radius: 5px;
+}
+
+.content-tab textarea{
+  width: 90%;
+  height: 100px;
+  margin-top: 5px;
+  border-radius: 5px;
+}
+.content-tab select{
+  height: 70px;
+  width: 90%;
+  border-radius: 5px;
+  white-space:pre-wrap;
+}
+
+.phone_future--content .content-tab{
+  height: 100%;
+}
+
+
+@keyframes tab-fadein {
+  from { height: 0%;}
+  to   { height: 100%;}
+}
+@keyframes tab-fadeout {
+  from { height: 100%;}
+  to   { height: 0%;}
+}
+
+.fadeInAnimation{
+  animation: tab-fadein 1s;
+  animation-fill-mode: backwards;
+}
+
+.fadeOutAnimation{
+  animation: tab-fadeout 1s;
+  animation-fill-mode: forwards;
 }

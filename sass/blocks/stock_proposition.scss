@@ -11,7 +11,7 @@ $slide-header-color:$footer-color;
 .stock-proposition{
   position: relative;
   width:100%;
-  min-height: 250px;
+  min-height: 310px;
   background: $stock_proposition_color;
   padding-bottom: 0px;
   padding-top: 0px;
@@ -34,7 +34,7 @@ $slide-header-color:$footer-color;
 
 .stock-proposition__item{
   width:280px;
-  margin: 25px 10px 10px 10px;
+  margin: 35px 10px 10px 10px;
   background-color: $slide-color;
   color: white;
   min-height: 350px;
@@ -153,7 +153,7 @@ $slide-header-color:$footer-color;
   .stock-proposition {
     text-align: center;
     padding-bottom: 10px;
-    min-height: 720px;
+    min-height: 690px;
     &::after{
       border-width: 40px 600px 0 600px;
     }
@@ -166,7 +166,7 @@ $slide-header-color:$footer-color;
       margin: 25px 5px 10px 5px;
       padding: 5px 0px 10px 0px;
       width: 280px;
-      min-height: 670px;
+      min-height: 640px;
       &::before{
         border-width: 0 139px 20px 139px;
       }

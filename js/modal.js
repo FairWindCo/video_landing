@@ -118,7 +118,20 @@ function createModalWindow(nameOfModalElement) {
     })
   });
 }
-
+function createFeedBackTabActivator() {
+  jQuery(document).ready(function () {
+    jQuery(".phone_future--form--tab").click(function (event) {
+      event.preventDefault();
+      jQuery(document).find(".content-tab").removeClass("fadeInAnimation");
+      jQuery(document).find(".content-tab").addClass("fadeOutAnimation");
+      var element=jQuery(this);
+      var data=element.attr("datatab");
+      var dest=jQuery(".content-tab."+data + "-form");
+      dest.removeClass("fadeOutAnimation");
+      dest.addClass("fadeInAnimation");
+    })
+  });
+}
 
 function createFeedBackActivator(nameOfModalElement,nameActivator,activateStyle,removeStyle,feedBackActivatorWrapper) {
   nameOfModalElement = typeof nameOfModalElement !== 'undefined' ? nameOfModalElement : '#feedBackForm';
