@@ -1,6 +1,6 @@
 $phone_width:56px;
 $phone_height:$phone_width;
-$animation_delay:60s;
+$animation_delay:6s;
 
 $panel-color:#013e61;
 
@@ -242,6 +242,7 @@ $panel-color:#013e61;
   margin-top: 40px;
   background-color: #013e61;
   cursor: pointer;
+  clip-path: polygon(-1px -1px,41px -41px,41px 21px,-1px 61px);
 }
 .phone_future--form--tabs:first-child{
   margin-top: 30px;
@@ -322,17 +323,22 @@ $line-color: #003655;
 
 .content-tab input{
   width: 90%;
-  margin-top: 5px;
+  display: block;
+  margin: 5px auto 0px auto;
   border-radius: 5px;
 }
 
 .content-tab textarea{
   width: 90%;
+  display: block;
+  margin: 5px auto 0px auto;
   height: 100px;
   margin-top: 5px;
   border-radius: 5px;
 }
 .content-tab select{
+  display: block;
+  margin: 5px auto 0px auto;
   height: 70px;
   width: 90%;
   border-radius: 5px;
@@ -351,6 +357,16 @@ $line-color: #003655;
 @keyframes tab-fadeout {
   from { height: 100%;}
   to   { height: 0%;}
+}
+
+.activeToggle{
+  background-color: #2b74a6;
+  &:after{
+    border-color: #2b74a6 transparent transparent transparent;
+  }
+  &:before{
+    border-color: transparent transparent #2b74a6 transparent;
+  }
 }
 
 .fadeInAnimation{

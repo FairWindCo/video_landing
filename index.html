@@ -272,84 +272,87 @@
     <div id="feedBackActivator" class="help_phone_future help_phone_future--button_call_phone"></div>
   </div>
 </footer>
+
 <div id="feedBackForm" class="phone_future--form hideBlockAnimation">
-  <div class="phone_future--form--tabs">
-    <div class="phone_future--form--tab phone-tab" datatab="phone"><img src="img/ph3.gif"></div>
-    <div class="phone_future--form--tab email-tab" datatab="email"><img src="img/ph1.gif"></div>
-    <div class="phone_future--form--tab chart-tab" datatab="chart"><img src="img/ph4.gif"></div>
-    <div class="phone_future--form--tab sold-tab" datatab="sold"><img src="img/ph2.gif"></div>
-  </div>
-  <div class="phone_future--form--header">Обратная связь
-    <div id="feedBackFormClose" class="phone_future--form--header--close"></div>
-  </div>
-  <div class="phone_future--content">
-    <div class="content-tab phone-form">
-      <p>Если у Вас возник вопрос по поводу данной продукции или Вы хотите ее преобрести, оставьте Ваши контактные данные и наш менеджер обязательно свяжется с Вами!</p>
-      <form action="#" id="feedback">
-        <input placeholder="Имя" type="text" required="true" name="name">
-        <input placeholder="Телефон +38(xxx)xxx-xxxx" type="phone" required="true" name="phone" pattern="[\+]\d{2}[\(]\d{3}[\)]\d{3}[\-]\d{4}" title="Формат телефона: +хх(xxx)xxx-xxxx">
-        <textarea placeholder="Комментарий" name="comment" style="display: block;"></textarea>
-        <input type="hidden" required="" name="key" value="NKT-324DFGghdh56#$tryFDGDF">
-        <input type="hidden" required="" name="object_id" value="NKT-VIDEO">
-        <input type="hidden" required="" name="action" value="message">
-        <input class="formBtn" type="submit">
-        <input class="formBtn" type="reset">
-      </form>
+    <div class="phone_future--form--tabs">
+      <div class="phone_future--form--tab phone-tab tab-selector" datatab="phone"><img src="img/ph3.gif"></div>
+      <div class="phone_future--form--tab email-tab tab-selector" datatab="email"><img src="img/ph1.gif"></div>
+      <div class="phone_future--form--tab chart-tab tab-selector" datatab="chart"><img src="img/ph4.gif"></div>
+      <div class="phone_future--form--tab sold-tab tab-selector" datatab="sold"><img src="img/ph2.gif"></div>
     </div>
-    <div class="content-tab email-form">
-      <p>У Вас возник вопрос? Задайте его нам! Мы обязательно ответим Вам на него!</p>
-      <form action="#" id="feedback">
-        <input placeholder="Имя" type="text" required="true" name="name">
-        <input placeholder="Email" type="email" name="email" required="true">
-        <textarea placeholder="Комментарий" name="comment" style="display: block;"></textarea>
-        <input type="hidden" required="" name="key" value="NKT-324DFGghdh56#$tryFDGDF">
-        <input type="hidden" required="" name="object_id" value="NKT-VIDEO">
-        <input type="hidden" required="" name="action" value="message">
-        <input class="formBtn" type="submit">
-        <input class="formBtn" type="reset">
-      </form>
+    <div class="phone_future--form--header">Обратная связь
+      <div id="feedBackFormClose" class="phone_future--form--header--close"></div>
     </div>
-    <div class="content-tab chart-form">
-      <p>Задайте Вам вопрос?</p>
-      <form action="#" id="feedback">
-        <input placeholder="Имя" type="text" required="true" name="name">
-        <textarea placeholder="Вопрос" name="comment" style="display: block;"></textarea>
-        <input type="hidden" required="" name="key" value="NKT-324DFGghdh56#$tryFDGDF">
-        <input type="hidden" required="" name="object_id" value="NKT-VIDEO">
-        <input type="hidden" required="" name="action" value="message">
-        <input class="formBtn" type="submit">
-        <input class="formBtn" type="reset">
-      </form></div>
-    <div class="content-tab sold-form">
-      <p>Купить:</p>
-      <form action="#" id="feedback">
-        <select>
-          <option>Бюджетный вариант на 4 камеры <span class="price">5833 грн</span></option>
-          <option>Бюджетный вариант на 8 камеры <span class="price">10189 грн</span></option>
-          <option>Оптимальный вариант на 4 камеры <span class="price">6819 грн</span></option>
-          <option>Оптимальный вариант на 8 камеры <span class="price">14139 грн</span></option>
-        </select>
-        <input placeholder="Имя" type="text" required="true" name="name">
-        <input placeholder="Телефон +38(xxx)xxx-xxxx" type="phone" required="true" name="phone" pattern="[\+]\d{2}[\(]\d{3}[\)]\d{3}[\-]\d{4}" title="Формат телефона: +хх(xxx)xxx-xxxx">
-        <textarea placeholder="Комментарий" name="comment" style="display: block;"></textarea>
-        <input type="hidden" required="" name="key" value="NKT-324DFGghdh56#$tryFDGDF">
-        <input type="hidden" required="" name="object_id" value="NKT-VIDEO">
-        <input type="hidden" required="" name="action" value="message">
-        <input class="formBtn" type="submit">
-        <input class="formBtn" type="reset">
-      </form>
+    <div class="phone_future--content">
+      <div class="content-tab phone-form">
+        <p>Если у Вас возник вопрос по поводу данной продукции или Вы хотите ее преобрести, оставьте Ваши контактные данные и наш менеджер обязательно свяжется с Вами!</p>
+        <form action="#" id="feedback1">
+          <input placeholder="Имя" type="text" required="true" name="name">
+          <input placeholder="Телефон +38(xxx)xxx-xxxx" type="phone" required="true" name="phone" pattern="[\+]\d{2}[\(]\d{3}[\)]\d{3}[\-]\d{4}" title="Формат телефона: +хх(xxx)xxx-xxxx">
+          <textarea placeholder="Комментарий" name="comment" style="display: block;"></textarea>
+          <input type="hidden" required="" name="key" value="NKT-324DFGghdh56#$tryFDGDF">
+          <input type="hidden" required="" name="object_id" value="NKT-VIDEO">
+          <input type="hidden" required="" name="action" value="message">
+          <input class="formBtn" type="submit">
+          <input class="formBtn" type="reset">
+        </form>
+      </div>
+      <div class="content-tab email-form">
+        <p>У Вас возник вопрос? Задайте его нам! Мы обязательно ответим Вам на него!</p>
+        <form action="#" id="feedback2">
+          <input placeholder="Имя" type="text" required="true" name="name">
+          <input placeholder="Email" type="email" name="email" required="true">
+          <textarea placeholder="Комментарий" name="comment" style="display: block;"></textarea>
+          <input type="hidden" required="" name="key" value="NKT-324DFGghdh56#$tryFDGDF">
+          <input type="hidden" required="" name="object_id" value="NKT-VIDEO">
+          <input type="hidden" required="" name="action" value="message">
+          <input class="formBtn" type="submit">
+          <input class="formBtn" type="reset">
+        </form>
+      </div>
+      <div class="content-tab chart-form">
+        <p>Задайте Вам вопрос?</p>
+        <form action="#" id="feedback3">
+          <input placeholder="Имя" type="text" required="true" name="name">
+          <textarea placeholder="Вопрос" name="comment" style="display: block;"></textarea>
+          <input type="hidden" required="" name="key" value="NKT-324DFGghdh56#$tryFDGDF">
+          <input type="hidden" required="" name="object_id" value="NKT-VIDEO">
+          <input type="hidden" required="" name="action" value="message">
+          <input class="formBtn" type="submit">
+          <input class="formBtn" type="reset">
+        </form></div>
+      <div class="content-tab sold-form">
+        <p>Купить:</p>
+        <form action="#" id="feedback4">
+          <select name="soldItem" id="soldSelector">
+            <option>Бюджетный вариант на 4 камеры <span class="price">5833 грн</span></option>
+            <option>Бюджетный вариант на 8 камеры <span class="price">10189 грн</span></option>
+            <option>Оптимальный вариант на 4 камеры <span class="price">6819 грн</span></option>
+            <option>Оптимальный вариант на 8 камеры <span class="price">14139 грн</span></option>
+          </select>
+          <input placeholder="Имя" type="text" required="true" name="name">
+          <input placeholder="Телефон +38(xxx)xxx-xxxx" type="phone" required="true" name="phone" pattern="[\+]\d{2}[\(]\d{3}[\)]\d{3}[\-]\d{4}" title="Формат телефона: +хх(xxx)xxx-xxxx">
+          <textarea placeholder="Комментарий" name="comment" style="display: block;"></textarea>
+          <input type="hidden" required="" name="key" value="NKT-324DFGghdh56#$tryFDGDF">
+          <input type="hidden" required="" name="object_id" value="NKT-VIDEO">
+          <input type="hidden" required="" name="action" value="message">
+          <input class="formBtn" type="submit">
+          <input class="formBtn" type="reset">
+        </form>
+      </div>
+      <div class="content-tab response"></div>
     </div>
-    <div class="content-tab response"></div>
-  </div>
 </div>
 <script>
 	jQuery( document ).ready(function() {
     new WOW().init();
-    createModal();
-    createModalWindow();
+    //createModal();
+    //createModalWindow();
     createAjax();
-    createFeedBackActivator();
-    createFeedBackTabActivator();
+    //createFeedBackActivator();
+    //createFeedBackTabActivator();
+    new MyModality('feedBackForm',new MyTabs("feedBackForm").hideTabs("2")).addActivatorById('showmodal',false,true,0,"2").addActivatorById('feedBackActivatorWrapper',true,true,0,"2").addActivatorBySelector('article.stock-proposition__item a',false,true,3,"2");
+    itemChanger('soldSelector','article.stock-proposition__item a');
 
     jQuery('#scrollup img').mouseover( function(){
       jQuery( this ).animate({opacity: 0.65},100);
