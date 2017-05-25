@@ -20,6 +20,7 @@
 	<link rel="stylesheet" media="all" type="text/css" href="css/style.css" >
 
   <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.7/es5-shim.min.js"></script>
   <script type='text/javascript' src="js/jquery.form.min.js"></script>
 	<script type='text/javascript' src="js/wow.min.js"></script>
   <script type='text/javascript' src="js/modal.js"></script>
@@ -230,35 +231,6 @@
   </div>
 </section>
 
-<!-- Hidden Form for send request for us-->
-<div id="myModal" class="modal">
-  <!-- Modal content -->
-  <div class="modal--content dialogWindow">
-    <div class="dialogWindow--header">Мы свяжемся с Вами<span class="modal--close">×</span></div>
-    <p>Если у Вас возник вопрос по поводу данной продукции или Вы хотите ее преобрести, оставьте Ваши контактные данные и наш менеджер обязательно свяжется с Вами!</p>
-    <div class="contactForm">
-      <form action="#" id="feedback">
-        <input placeholder="Имя" type="text" required="" name="name">
-        <input placeholder="Email" type="email" name="email">
-        <input placeholder="Телефон +38(xxx)xxx-xxxx" type="phone" required="" name="phone" pattern="[\+]\d{2}[\(]\d{3}[\)]\d{3}[\-]\d{4}" title="Формат телефона: +хх(xxx)xxx-xxxx">
-        <textarea placeholder="Комментарий" name="comment"></textarea>
-        <input type="hidden" required="" name="key" value="NKT-324DFGghdh56#$tryFDGDF">
-        <input type="hidden" required="" name="object_id" value="NKT-VIDEO">
-        <input type="hidden" required="" name="action" value="message">
-        <input class="formBtn" type="submit">
-        <input class="formBtn" type="reset">
-      </form>
-    </div>
-  </div>
-</div>
-<!-- Hidden element for rendering response from AJAX-->
-<div id="myModalResponse" class="modal">
-  <!-- Modal content -->
-  <div class="modal--content propouseWindow">
-    <div class="propouseWindow--header"><span class="responseHeaderText"></span><span class="modal--close">×</span></div>
-    <p><span class="responseText"></span></p>
-  </div>
-</div>
 <footer>
     <div class="global-wrapper">
       <p>Copyright © Инновационные системы бизнеса 2017</p>
@@ -291,8 +263,8 @@
           <input placeholder="Телефон +38(xxx)xxx-xxxx" type="phone" required="true" name="phone" pattern="[\+]\d{2}[\(]\d{3}[\)]\d{3}[\-]\d{4}" title="Формат телефона: +хх(xxx)xxx-xxxx">
           <textarea placeholder="Комментарий" name="comment" style="display: block;"></textarea>
           <input type="hidden" required="" name="key" value="NKT-324DFGghdh56#$tryFDGDF">
-          <input type="hidden" required="" name="object_id" value="NKT-VIDEO">
-          <input type="hidden" required="" name="action" value="message">
+          <input type="hidden" required="" name="object_id" value="Видео наблюдение">
+          <input type="hidden" required="" name="action" value="call_request">
           <input class="formBtn" type="submit">
           <input class="formBtn" type="reset">
         </form>
@@ -304,8 +276,8 @@
           <input placeholder="Email" type="email" name="email" required="true">
           <textarea placeholder="Комментарий" name="comment" style="display: block;"></textarea>
           <input type="hidden" required="" name="key" value="NKT-324DFGghdh56#$tryFDGDF">
-          <input type="hidden" required="" name="object_id" value="NKT-VIDEO">
-          <input type="hidden" required="" name="action" value="message">
+          <input type="hidden" required="" name="object_id" value="Видео наблюдение">
+          <input type="hidden" required="" name="action" value="mail_request">
           <input class="formBtn" type="submit">
           <input class="formBtn" type="reset">
         </form>
@@ -335,24 +307,26 @@
           <textarea placeholder="Комментарий" name="comment" style="display: block;"></textarea>
           <input type="hidden" required="" name="key" value="NKT-324DFGghdh56#$tryFDGDF">
           <input type="hidden" required="" name="object_id" value="NKT-VIDEO">
-          <input type="hidden" required="" name="action" value="message">
+          <input type="hidden" required="" name="action" value="sold">
           <input class="formBtn" type="submit">
           <input class="formBtn" type="reset">
         </form>
       </div>
-      <div class="content-tab response"></div>
+      <div id="myModalResponse" class="content-tab response">
+        <!-- Hidden element for rendering response from AJAX-->
+        <div class="propouseWindow--header">
+          <span class="responseHeaderText"></span>
+        </div>
+        <p><span class="responseText"></span></p>
+      </div>
     </div>
 </div>
 <script>
 	jQuery( document ).ready(function() {
     new WOW().init();
-    //createModal();
-    //createModalWindow();
-    createAjax();
-    //createFeedBackActivator();
-    //createFeedBackTabActivator();
-    new MyModality('feedBackForm',new MyTabs("feedBackForm").hideTabs("2")).addActivatorById('showmodal',false,true,0,"2").addActivatorById('feedBackActivatorWrapper',true,true,0,"2").addActivatorBySelector('article.stock-proposition__item a',false,true,3,"2");
+    var modal=new MyModality('feedBackForm',new MyTabs("feedBackForm").hideTabs("2")).addActivatorById('showmodal',false,true,0,"2").addActivatorById('feedBackActivatorWrapper',true,true,0,"2").addActivatorBySelector('article.stock-proposition__item a',false,true,3,"2");
     itemChanger('soldSelector','article.stock-proposition__item a');
+    new MyAJAXHelper('http://localhost/12',"#myModalResponse",modal,4,"2",'NKT-324DFGghdh56#$tryFDGDF').setupFormSubmitAJAXProcessor('#feedBackForm form').sendAJAXStatistic('visit').setupClickAction('article.stock-proposition__item a','select','product');
 
     jQuery('#scrollup img').mouseover( function(){
       jQuery( this ).animate({opacity: 0.65},100);

@@ -1,124 +1,119 @@
+"use strict"
 /**
  * Created by Сергей on 09.03.2017.
  */
 
 
-function createAjax(formName,nameOfModalForm,nameOfModalElement){
-  formName = typeof formName !== 'undefined' ? formName : '#feedback';
+function MyAJAXHelper(url,nameOfModalElement,modality,responseTab,hideAdditionalTab,key){
+  if(typeof url === 'undefined' ) {
+    throw new SyntaxError('No URL');
+    return;
+  }
   nameOfModalElement = typeof nameOfModalElement !== 'undefined' ? nameOfModalElement : '#myModalResponse';
-  nameOfModalForm = typeof nameOfModalForm !== 'undefined' ? nameOfModalForm : '#myModal';
+  var modal = jQuery(nameOfModalElement);
+  var clientId=new Date().toLocaleString()+" : "+String(Math.random()).slice(2)+" : "+navigator.userAgent;
+  var clientHash=hashCode(clientId);
+  var useModality=typeof modality !== 'undefined' && modality !==null && modality instanceof MyModality;
+  var lastResult="no ajax";
+  var _self=this;
+  var scriptKey=key;
   // prepare Options Object
   var options = {
-    url:        'http://nkt.ua/mailer.php',
-    type:'post',
+    url:       url,
+    type:      'post',
     dataType:  'json',
-    success:    function(data) {
-      if(typeof data!== 'undefined') {
-        var modal = jQuery(nameOfModalElement);
-        var modalForm = jQuery(nameOfModalForm);
-        modalForm.css("display", "none");
-        modal.css("display", "block");
-        text = typeof data['text'] !== 'undefined'? data['text'] : data['error'];
-        if(data['error'] !== 'undefined'){
-          modal.find('.propouseWindow--header').addClass('propouseWindow--header__red')
-        } else {
-          modal.find('.propouseWindow--header').removeClass('propouseWindow--header__red')
-        }
-        modal.find('.responseHeaderText').text(data['message']);
-        modal.find('.responseText').text(text);
-        //alert('Thanks for your comment!' + data);
+    data:{'clientId':clientId,'hash':clientHash},
+    success:    responseProcessor,
+    error: function (xhr, ajaxOptions, thrownError) {
+      lastResult="error";
+      modal.find('.propouseWindow--header').addClass('propouseWindow--header__red');
+      if(useModality){
+        modality.show(true);
+        modality.tabSelect(responseTab,hideAdditionalTab);
+        modal.find('.responseHeaderText').text(xhr.statusText);
+        modal.find('.responseText').text(thrownError);
       }
     }
   };
 
-  jQuery(document).ready(function () {
-    jQuery(formName).submit(function() {
-      // submit the form
-      jQuery(this).ajaxSubmit(options);
-      // return false to prevent normal browser submit and page navigation
-      return false;
+  function hashCode(string){
+      var hash = 0, i, chr;
+      if (string.length === 0) return hash;
+      for (i = 0; i < string.length; i++) {
+        chr   = string.charCodeAt(i);
+        hash  = ((hash << 5) - hash) + chr;
+        hash |= 0; // Convert to 32bit integer
+      }
+      return hash;
+  }
+
+  function responseProcessor(data){
+    if(typeof data!== 'undefined') {
+      var text = typeof data['text'] !== 'undefined'? data['text'] : data['error'];
+      if(data['error'] !== 'undefined'){
+        lastResult="error";
+        modal.find('.propouseWindow--header').addClass('propouseWindow--header__red')
+      } else {
+        lastResult="success";
+        modal.find('.propouseWindow--header').removeClass('propouseWindow--header__red')
+      }
+      modal.find('.responseHeaderText').text(data['message']);
+      modal.find('.responseText').text(text);
+      //alert('Thanks for your comment!' + data);
+      if(useModality){
+        modality.show(true);
+        modality.tabSelect(responseTab,hideAdditionalTab);
+      }
+    }
+  }
+
+
+  function formSubmitProcessor(){
+    // submit the form
+    jQuery(this).ajaxSubmit(options);
+    // return false to prevent normal browser submit and page navigation
+    return false;
+  }
+
+  this.sendAJAXStatistic=function (action,info) {
+    sendAJAXStat(action,scriptKey,info);
+    return _self;
+  }
+
+  function sendAJAXStat(action,key,info){
+    var statoptions = {
+      url:       url,
+      type:      'post',
+      dataType:  'json',
+      data:{'clientId':clientId,'hash':clientHash,'action':'statistic','actionType':action,'key':key,'info':info},
+      success:    function () {lastResult="success";},
+      error:      function () {lastResult="error";},
+      }
+    jQuery.ajax(statoptions);
+  }
+
+  this.getLastResult=function () {
+    return lastResult;
+  }
+
+  this.setupClickAction=function(element,action,info){
+    if(typeof info === 'undefined') info="";
+    jQuery(element).click(function (event) {
+      var index=this.getAttribute('data-toggleSelectorNumber');
+      if(typeof index === 'undefined') index="no";
+      var elementClick=info+" "+'dataSelector='+index+" ["+ this.tagName +':'+ this.id+"]";
+      _self.sendAJAXStatistic(action,elementClick)
     });
-  });
-}
+    return _self;
+  }
 
-function createModal(nameOfModalElement,nameActivator,noComments) {
-  nameOfModalElement = typeof nameOfModalElement !== 'undefined' ? nameOfModalElement : '#myModal';
-  nameActivator = typeof nameActivator !== 'undefined' ? nameActivator : '#showmodal';
-  noComments = typeof noComments !== 'undefined' ? noComments : false;
-  jQuery(document).ready(function () {
-    // Get the modal
-    var modal = jQuery(nameOfModalElement);
-    jQuery(nameActivator).click(
-      function (event) {
-        event.preventDefault();
-        // When the user clicks on the button, open the modal
-        modal.css("display", "block");
-        if(noComments){
-          //alert("test" + modal.find("[name=comment]"));
-          modal.find("[name=comment]").css("display", "none");
-        } else {
-          modal.find("[name=comment]").css("display", "block");
-        }
-      }
-    );
-    // Get the <span> element that closes the modal
-    modal.find('.modal--close').click(
-      function () {
-        // When the user clicks on <span> (x), close the modal
-        modal.css("display", "none");
-      }
-    );
-    modal.click(function (event) {
-      if (modal.is(event.target)) {
-        modal.css("display", "none");
-      }
-    })
-  });
-}
+  this.setupFormSubmitAJAXProcessor=function(formName){
+    formName = typeof formName !== 'undefined' ? formName : '#feedback';
+    jQuery(formName).submit(formSubmitProcessor);
+    return _self;
+  }
 
-function createModalActivator(nameOfModalElement,nameActivator,noComments) {
-  nameOfModalElement = typeof nameOfModalElement !== 'undefined' ? nameOfModalElement : '#myModal';
-  nameActivator = typeof nameActivator !== 'undefined' ? nameActivator : '#showmodal';
-  noComments = typeof noComments !== 'undefined' ? noComments : false;
-  jQuery(document).ready(function () {
-    // Get the modal
-    var modal = jQuery(nameOfModalElement);
-    jQuery(nameActivator).click(
-      function (event) {
-        event.preventDefault();
-        // When the user clicks on the button, open the modal
-        modal.css("display", "block");
-        if(noComments){
-          //alert("test" + modal.find("[name=comment]"));
-          modal.find("[name=comment]").css("display", "none");
-        } else {
-          modal.find("[name=comment]").css("display", "block");
-        }
-      }
-    );
-  });
 }
-
-function createModalWindow(nameOfModalElement) {
-  nameOfModalElement = typeof nameOfModalElement !== 'undefined' ? nameOfModalElement : '#myModalResponse';
-  jQuery(document).ready(function () {
-    // Get the modal
-    var modal = jQuery(nameOfModalElement);
-    // Get the <span> element that closes the modal
-    modal.find('.modal--close').click(
-      function () {
-        // When the user clicks on <span> (x), close the modal
-        modal.css("display", "none");
-      }
-    );
-    modal.click(function (event) {
-      if (modal.is(event.target)) {
-        modal.css("display", "none");
-      }
-    })
-  });
-}
-
 
 // only implement if no native implementation is available
 if (typeof Array.isArray === 'undefined') {
@@ -194,8 +189,12 @@ function MyTabs(tabContainerElementId,tabElementSelector,toggleElementSelector){
       removeCssClassForElements(contentTabs[tabNumber],"fadeOutAnimation");
       setCssClassForElements(currentTab,"fadeOutAnimation");
       setCssClassForElements(contentTabs[tabNumber],"fadeInAnimation");
-      toggleElements[curentIndex].classList.remove("activeToggle");
-      toggleElements[tabNumber].classList.add("activeToggle");
+      if(curentIndex>=0 && curentIndex < toggleElements.length) {
+        toggleElements[curentIndex].classList.remove("activeToggle");
+      }
+      if(tabNumber < toggleElements.length) {
+        toggleElements[tabNumber].classList.add("activeToggle");
+      }
       currentTab=contentTabs[tabNumber];
       curentIndex=tabNumber;
     }
@@ -259,22 +258,6 @@ function MyTabs(tabContainerElementId,tabElementSelector,toggleElementSelector){
   }
 }
 
-
-function createFeedBackTabActivator() {
-  jQuery(document).ready(function () {
-    jQuery(".phone_future--form--tab").click(function (event) {
-      event.preventDefault();
-      jQuery(document).find(".content-tab").removeClass("fadeInAnimation");
-      jQuery(document).find(".content-tab").addClass("fadeOutAnimation");
-      var element=jQuery(this);
-      var data=element.attr("datatab");
-      var dest=jQuery(".content-tab."+data + "-form");
-      dest.removeClass("fadeOutAnimation");
-      dest.addClass("fadeInAnimation");
-    })
-  });
-}
-
 function MyModality(modalElementId,tabContainer,deactivatorSelector,activateMoveStyle,removeMoveStyle,activateStyle,removeStyle){
   if(typeof modalElementId === 'undefined' ) {
     throw new SyntaxError('No ID');
@@ -316,7 +299,7 @@ function MyModality(modalElementId,tabContainer,deactivatorSelector,activateMove
 
 
   function showModalElementListener(event,hideActivator,showInModalMode) {
-    event.preventDefault();
+    if(typeof event !== 'undefined' && event!==null)event.preventDefault();
     //event.stopPropagation();
     if(isShow) return;
     modalElement.style.display="block";
@@ -327,7 +310,7 @@ function MyModality(modalElementId,tabContainer,deactivatorSelector,activateMove
     showInModalMode = typeof showInModalMode !== 'undefined' ? showInModalMode : false;
 
 
-    if(hideActivator){
+    if(hideActivator && typeof event !== 'undefined' && event!==null){
       if(event.currentTarget !== 'undefined'){
         hiddenActivator=event.currentTarget;
         hiddenActivator.classList.remove(activateStyle);
@@ -352,7 +335,7 @@ function MyModality(modalElementId,tabContainer,deactivatorSelector,activateMove
   }
 
   function hideModalElementListener(event) {
-    event.preventDefault();
+    if(typeof event !== 'undefined' && event!==null)event.preventDefault();
     //event.stopPropagation();
     if(!isShow) return;
 
@@ -375,6 +358,22 @@ function MyModality(modalElementId,tabContainer,deactivatorSelector,activateMove
     isShow=false;
   }
 
+  this.hide=function () {
+    hideModalElementListener();
+  }
+
+  this.show=function (showInModalMode) {
+    showModalElementListener(null,false,showInModalMode);
+  }
+
+  this.tabSelect=function(index,hideTabs){
+    if(internalTab){
+      internalTabSelectorObject.showAllTabs();
+      internalTabSelectorObject.setActiveTab(index);
+      internalTabSelectorObject.hideTabs(hideTabs);
+    }
+  }
+
   if(typeof deactivators !== 'undefined' ) {
     if(typeof deactivators.length === 'undefined'){
       deactivators.addEventListener("click",hideModalElementListener);
@@ -391,13 +390,14 @@ function MyModality(modalElementId,tabContainer,deactivatorSelector,activateMove
 
   this.addActivatorById=function(elementId,hideActivator,showInModalMode,activeTab,hiddenTab){
     if(typeof modalElementId === 'undefined' ) return _self;
-    activatorElement=document.getElementById(elementId);
+    var activatorElement=document.getElementById(elementId);
     if(typeof activatorElement === 'undefined' ) return _self;
     activeTab = typeof activeTab !== 'undefined' ? activeTab : 0;
 
     activatorElement.addEventListener("click",function (event) {
       showModalElementListener(event,hideActivator,showInModalMode);
       if(internalTab){
+        internalTabSelectorObject.showAllTabs();
         internalTabSelectorObject.setActiveTab(activeTab);
         internalTabSelectorObject.hideTabs(hiddenTab);
       }
@@ -407,7 +407,7 @@ function MyModality(modalElementId,tabContainer,deactivatorSelector,activateMove
 
   this.addActivatorBySelector=function(elementSelector,hideActivator,showInModalMode,activeTab,hiddenTab){
     if(typeof modalElementId === 'undefined' ) return _self;
-    activatorElements=document.querySelectorAll(elementSelector);
+    var activatorElements=document.querySelectorAll(elementSelector);
     if(typeof activatorElements === 'undefined' ) return _self;
     activeTab = typeof activeTab !== 'undefined' ? activeTab : 0;
 
@@ -415,6 +415,7 @@ function MyModality(modalElementId,tabContainer,deactivatorSelector,activateMove
       activatorElements[i].addEventListener("click",function (event) {
         showModalElementListener(event,hideActivator,showInModalMode);
         if(internalTab){
+          internalTabSelectorObject.showAllTabs();
           internalTabSelectorObject.setActiveTab(activeTab);
           internalTabSelectorObject.hideTabs(hiddenTab);
         }
@@ -439,7 +440,7 @@ function itemChanger(itemSelectElement,changersElement) {
     throw new SyntaxError('No changers selectors');
     return;
   }
-  changers=document.querySelectorAll(changersElement);
+  var changers=document.querySelectorAll(changersElement);
   for(var i = 0; i < changers.length; i++){
     changers[i].setAttribute('data-toggleSelectorNumber',i.toString());
     changers[i].addEventListener("click",function (event) {
@@ -448,45 +449,4 @@ function itemChanger(itemSelectElement,changersElement) {
     });
   }
 
-}
-
-function createFeedBackActivator(nameOfModalElement,nameActivator,activateStyle,removeStyle,feedBackActivatorWrapper) {
-  nameOfModalElement = typeof nameOfModalElement !== 'undefined' ? nameOfModalElement : '#feedBackForm';
-  nameActivator = typeof nameActivator !== 'undefined' ? nameActivator : '#feedBackActivator';
-  nameDeActivator = typeof nameDeActivator !== 'undefined' ? nameDeActivator : "#feedBackFormClose";
-  activateMoveStyle = typeof activateStyle !== 'undefined' ? activateStyle : "showBlockMoveAnimation";
-  removeMoveStyle = typeof removeStyle !== 'undefined' ? removeStyle : "hideBlockMoveAnimation";
-  activateStyle = typeof activateStyle !== 'undefined' ? activateStyle : "showBlockAnimation";
-  removeStyle = typeof removeStyle !== 'undefined' ? removeStyle : "hideBlockAnimation";
-  feedBackActivatorWrapper=typeof feedBackActivatorWrapper !== 'undefined' ? feedBackActivatorWrapper : "#feedBackActivatorWrapper";
-  jQuery(document).ready(function () {
-    // Get the modal
-    var modal = jQuery(nameOfModalElement);
-    var activator=jQuery(nameActivator);
-    var deactivator=jQuery(nameDeActivator);
-    var feedactivator=jQuery(feedBackActivatorWrapper);
-    activator.click(
-      function (event) {
-        event.preventDefault();
-
-        // When the user clicks on the button, open the modal
-        modal.css("display", "block");
-        modal.removeClass(removeMoveStyle);
-        modal.addClass(activateMoveStyle);
-
-        feedactivator.addClass(removeStyle);
-        feedactivator.removeClass(activateStyle);
-      });
-
-    deactivator.click(
-      function (event) {
-        event.preventDefault();
-        // When the user clicks on the button, open the modal
-        //modal.css("display", "none");
-        feedactivator.removeClass(removeStyle);
-        feedactivator.addClass(activateStyle);
-        modal.removeClass(activateMoveStyle);
-        modal.addClass(removeMoveStyle);
-      });
-  });
 }
