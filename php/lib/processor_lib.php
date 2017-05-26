@@ -1,8 +1,6 @@
 <?php
 if (!defined('MESSAGE_PROCESSOR')) { die('Access denied'); }
-
-
-require_once 'lib/mailer/PHPMailerAutoload.php';
+require_once 'mailer/PHPMailerAutoload.php';
 require_once 'config.php';
 
 
