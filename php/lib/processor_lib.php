@@ -2,8 +2,8 @@
 if (!defined('MESSAGE_PROCESSOR')) { die('Access denied'); }
 
 
-require 'lib/mailer/PHPMailerAutoload.php';
-require 'config.php';
+require_once 'lib/mailer/PHPMailerAutoload.php';
+require_once 'config.php';
 
 
 function getClientIP(){
@@ -131,7 +131,7 @@ HTML;
 	}
 }
 
-function MySQL_Stat($typeStat,$clientID,$clientHash,$subType,$text){
+function MySQL_StatEX($typeStat,$clientID,$clientHash,$subType,$text){
   global $config;
   $clientIP=getClientIP();
   $mysqli = mysqli_connect($config['db_host'], $config['db_user'] , $config['db_password'], $config['db_name']);
@@ -142,22 +142,23 @@ function MySQL_Stat($typeStat,$clientID,$clientHash,$subType,$text){
   $result = $mysqli->query("SHOW TABLES LIKE '".$config['db_table']."'");
   if (!$result || $result->num_rows != 1) {
     $createSQL=<<<C_SQL
-    CREATE TABLE {$config['db_table']} IF NOT EXISTS(
-      stat_date DATETIME DEFAULT CURRENT_TIMESTAMP,
-      stat_type INT(3),
-      client_ip VARCHAR(25),
-      client_id VARCHAR(150),
-      client_hash INT(12),
-      sub_type VARCHAR(25),
-      info VARCHAR(255)
+    CREATE TABLE IF NOT EXISTS {$config['db_table']} (
+      `creation_time` timestamp DEFAULT CURRENT_TIMESTAMP,
+      `stat_type` INT(3),
+      `client_ip` VARCHAR(25),
+      `client_id` VARCHAR(150),
+      `client_hash` INT(12),
+      `sub_type` VARCHAR(25),
+      `info` VARCHAR(255)
     );
 C_SQL;
 
 
     $result=$mysqli->query($createSQL);
+    if(!$result)error_log("MySQLError: (" . $mysqli->errno . ") " . $mysqli->error);
   }
   if($result){
-    if (($stmt = $mysqli->prepare("INSERT INTO '".$config['db_table']."'(stat_type,client_ip,client_id,client_hash,sub_type,info) VALUES(?,?,?,?,?,?)"))) {
+    if (($stmt = $mysqli->prepare("INSERT INTO `".$config['db_table']."`(stat_type,client_ip,client_id,client_hash,sub_type,info) VALUES(?,?,?,?,?,?)"))) {
       if (!$stmt->bind_param("ississ", $typeStat,$clientIP,$clientID,$clientHash,$subType,$text)) {
         error_log("Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error);
       } else {
@@ -171,6 +172,7 @@ C_SQL;
     }
 
   } else {
+
     error_log( "NO TABLE " . $config['db_table']);
   }
   $mysqli->close();

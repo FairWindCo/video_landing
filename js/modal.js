@@ -22,7 +22,7 @@ function MyAJAXHelper(url,nameOfModalElement,modality,responseTab,hideAdditional
     url:       url,
     type:      'post',
     dataType:  'json',
-    data:{'clientId':clientId,'hash':clientHash},
+    data:{'clientId':clientId,'hash':clientHash,'ajax':1},
     success:    responseProcessor,
     error: function (xhr, ajaxOptions, thrownError) {
       lastResult="error";
@@ -85,7 +85,7 @@ function MyAJAXHelper(url,nameOfModalElement,modality,responseTab,hideAdditional
       url:       url,
       type:      'post',
       dataType:  'json',
-      data:{'clientId':clientId,'hash':clientHash,'action':'statistic','actionType':action,'key':key,'info':info},
+      data:{'clientId':clientId,'hash':clientHash,'action':'statistic','actionType':action,'key':key,'info':info,'ajax':1},
       success:    function () {lastResult="success";},
       error:      function () {lastResult="error";},
       }

@@ -326,7 +326,7 @@
     new WOW().init();
     var modal=new MyModality('feedBackForm',new MyTabs("feedBackForm").hideTabs("2")).addActivatorById('showmodal',false,true,0,"2").addActivatorById('feedBackActivatorWrapper',true,true,0,"2").addActivatorBySelector('article.stock-proposition__item a',false,true,3,"2");
     itemChanger('soldSelector','article.stock-proposition__item a');
-    new MyAJAXHelper('http://localhost/12',"#myModalResponse",modal,4,"2",'NKT-324DFGghdh56#$tryFDGDF').setupFormSubmitAJAXProcessor('#feedBackForm form').sendAJAXStatistic('visit').setupClickAction('article.stock-proposition__item a','select','product');
+    new MyAJAXHelper('http://localhost/12/processor.php',"#myModalResponse",modal,4,"2",'NKT-324DFGghdh56#$tryFDGDF').setupFormSubmitAJAXProcessor('#feedBackForm form').sendAJAXStatistic('visit').setupClickAction('article.stock-proposition__item a','select','product');
 
     jQuery('#scrollup img').mouseover( function(){
       jQuery( this ).animate({opacity: 0.65},100);

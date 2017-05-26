@@ -1,6 +1,6 @@
 <?php
 define('MESSAGE_PROCESSOR', 'C');
-require 'lib/processor_lib.php';
+require_once 'lib/processor_lib.php';
 $action=getRequestValue('action');
 $key=getParamsPost('key');
 $data = array();
@@ -10,7 +10,7 @@ if(!empty($key) && $key=='NKT-324DFGghdh56#$tryFDGDF') {
   if($action=="statistic") {
     $subtype = getParamsPost('actionType');
     $text = getParamsPost('info');
-    MySQL_Stat(0,$clientID,$clientHash,$subtype,$text);
+    MySQL_StatEX(0,$clientID,$clientHash,$subtype,$text);
   } else if($action=="call_request") {
 
     $name = getParamsPost('name');
@@ -40,7 +40,7 @@ ClientID: {$clientID}
 ClientHASH: {$clientHash}
 {$comment};
 MESSAGE1;
-
+    MySQL_StatEX(1,$clientID,$clientHash,"CALL",$smtp_AltBody);
     $data = sendMail($smtp_Subject, $smtp_Body, $smtp_AltBody);
   }else if($action=="mail_request") {
     $name = getParamsPost('name');
@@ -70,7 +70,7 @@ ClientID: {$clientID}
 ClientHASH: {$clientHash}
 {$comment};
 MESSAGE2;
-
+    MySQL_StatEX(2,$clientID,$clientHash,"MAIL",$smtp_AltBody);
     $data = sendMail($smtp_Subject, $smtp_Body, $smtp_AltBody);
   }else  if($action=="sold") {
 
@@ -104,7 +104,7 @@ ClientID: {$clientID}
 ClientHASH: {$clientHash}
 {$comment};
 MESSAGE3;
-
+    MySQL_StatEX(3,$clientID,$clientHash,"SOLD",$smtp_AltBody);
     $data = sendMail($smtp_Subject, $smtp_Body, $smtp_AltBody);
 
   } else {
